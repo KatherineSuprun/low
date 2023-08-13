@@ -2,9 +2,10 @@ import Hall.ClientsQueue;
 import MenuRestaurant.*;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class Restaurant {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 
         System.out.println("Welcome to restaurant!");
@@ -39,33 +40,27 @@ public class Restaurant {
         Order.createOrder();
         MenuSort.filter();
 
-//        Kitchen kitchen = new Kitchen();
-//        Map<String, Food> ordered = Map.of("Fish", new Food("Fish"),
-//                "Meat", new Food("Meat"), "Burger", new Food("Burger"),
-//                "Pizza", new Food("Pizza"));
-//        Food food = new Food(ordered);
-//        kitchen.startCookingProcess((Food) ordered);
 
-//        Map<String, ? super Food> kitchenMenu = Map.of(
-//                "Beef steak", new MeatDish("Beaf",
-//                        12.000, List.of(""), false));
-//    public static final Map<String, ? super Drink> barMenu = Map.of("Vodka",
-//            new AlcoDrink(), "Sok", new NonAlcoDrink());
-
-//Map<String, Dish> ordered = new HashMap<>();
-//        ordered.put("Puree", new Dish("Puree", List.of("Potato", "Cream", "Salt"),
-//                List.of( States.CHOPPED, States.BOLED, States.WITH_SPICES)));
-////        ordered.put("Apple Tart", new Dish("Apple Tart", List.of("Base", "Cream", "Lemons","Sugar"),
-////                List.of(States.CHOPPED, States.BAKED)));
+        Kitchen kitchen = new Kitchen();
+         final Map<String, Food> ordered = new HashMap<>();
+         ordered.put("Pizza", new Pizza(20, List.of("dd", "ddd"),
+                 List.of(States.PREPARING, States.SAUCE)));
 
 
-//        List<MenuSort> duplicates = menuPrices.stream()
-//                .collect(Collectors.groupingBy(Function.identity()))
-//                .entrySet()
-//                .stream()
-//                .filter(e -> e.getValue().size() > 1)
-//                .map(Map.Entry::getKey)
-//                .toList();
+         ordered.put("Burger", new Burger(20, List.of("dd"),
+                 List.of(States.PREPARING, States.SAUCE, States.ADD_INGREDIENTS,
+                         States.BAKE,States.PACKING,States.FRY,States.CUT)));
+
+        kitchen.startCookingProcess(ordered);
+
+//        "Pizza", new Food(Map.of("Pizza",
+//                new Pizza(20, List.of("", ""),true,
+//                        Map.of("Burger",
+//                new Food(Map.of("Burger",new Burger(20, List.of("beaf"),
+//                List.of(States.PREPARING, States.SAUCE,States.BAKE,
+//                        States.ADD_INGREDIENTS,States.BAKE,States.SPICES,States.CUT,States.PACKING)),
+//                        Map.of("Fish",
+//                                new Fish(30, List.of("Fish"), true))))))))));
 
         System.out.println("Ohh, and what about drinks? ");
         Map<String, String> menuDrink = new HashMap<>();

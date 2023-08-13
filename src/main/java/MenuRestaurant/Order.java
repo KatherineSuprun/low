@@ -1,9 +1,12 @@
 package MenuRestaurant;
 
 import Worker.Cook;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
-
+@Setter
+@Getter
 public class Order {
 
     public static int quantity1;
